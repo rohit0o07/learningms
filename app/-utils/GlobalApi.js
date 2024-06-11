@@ -41,6 +41,27 @@ const getAllCourseList = async () => {
   }
 };
 
+const getSideBanner=async() => {
+  const query = gql`query GetSideBanner {
+  sideBanners {
+    id
+    name
+    banner {
+      id
+      url
+    }
+  }
+}
+`
+try {
+  const result = await request(MASTER_URL, query);
+  return result;
+} catch (error) {
+  console.error('Error fetching course list:', error);
+  throw error;
+}
+}
+
 export default {
-  getAllCourseList
+  getAllCourseList,getSideBanner
 };

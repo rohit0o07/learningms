@@ -2,6 +2,8 @@
 import React from 'react'
 import WelcomeBanner from './_components/WelcomeBanner'
 import CourseList from './_components/CourseList'
+import SideBanners from './_components/SideBanners'
+
 
 function Courses() {
   return (
@@ -14,8 +16,9 @@ function Courses() {
           <CourseList/>
       </div>
       {/* right container*/}
-      <div>
-      right section
+      <div className='p-5 bg-white rounded-xl'>
+      right
+        <SideBanners/>
       </div>
     </div>
   )
