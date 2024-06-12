@@ -63,35 +63,31 @@ try {
 }
 }
 
-const getCourseById = async(courseId) => {
+const getCourseById= async(courseId)=> {
   const query = gql`
-        query MyQuery {
-        courseList(where: {slug: "`+courseId+`"}) {
-          author
-          banner {
+  query MyQuery {
+  courseList(where: {slug: "python-course"}) {
+    author
+    banner {
+      url
+    }
+    chapter {
+      ... on Chapter {
+        id
+        name
+        video {
           url
-          }
-        chapter {
-        ... on Chapter {
-          id
-          name
-          video {
-          url
-          }
         }
       }
-      demoUrl
-      description
-      free
-      id
-      name
-      slug
-      sourceCode
-      tags
-      totalChapters
-      }
-    }`
-    
+    }
+    demoUrl
+    description
+    free
+    id
+    name
+  }
+}
+`
 try {
   const result = await request(MASTER_URL, query);
   return result;
@@ -100,6 +96,8 @@ try {
   throw error;
 }
 }
+
+
 
 export default {
   getAllCourseList,getSideBanner,getCourseById

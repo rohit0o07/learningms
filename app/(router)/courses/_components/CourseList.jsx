@@ -1,4 +1,4 @@
-import GlobalApi from '@/app/-utils/GlobalApi'
+import GlobalApi from '@/app/_utils/GlobalApi'
 import React, { useEffect, useState } from 'react'
 import {
   Select,
@@ -44,7 +44,7 @@ function CourseList() {
       {/*display Course list*/}
       <div className='grid grid-cols-2 lg:grid-cols-3 gap-4 mt-4'>
         {courseList?.length>0? courseList.map((item,index)=>(
-          <Link href={'/course-preview/'+item.slug} >
+          <Link href={'/course-preview/'+item.id} >
           <div key={index}>
             <CourseItem course={item}/>
           </div>
