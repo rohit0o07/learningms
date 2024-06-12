@@ -1,38 +1,52 @@
 "use client"
 
-import { BadgeCheck, BadgeIcon, BookOpen, GraduationCap, LayoutGrid, Mail } from 'lucide-react'
+import { useUser } from '@clerk/nextjs'
+import { BadgeCheck, BadgeIcon, BookOpen, GraduationCap, LayoutDashboard, LayoutGrid, Mail } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import React, { useEffect } from 'react'
 
 function SideNav() {
+  const user = useUser();
   const menu =[
     {
       id:1,
+      name:'Dashboard',
+      icon:LayoutDashboard,
+      path:'/dashboard',
+      auth:user,
+    },
+    {
+      id:2,
       name:'All Courses',
       icon:BookOpen,
-      path:'/courses'
-    },{
-      id:2,
-      name:"Membership",
-      icon:BadgeCheck,
-      path:'/membership'
+      path:'/courses',
+      auth:true
     },{
       id:3,
+      name:"Membership",
+      icon:BadgeCheck,
+      path:'/membership',
+      auth:true
+    },{
+      id:4,
       name:"Be Instructor",
       icon:GraduationCap,
       path:'/instructor',
-    },{
-      id:4,
-      name:'Store',
-      icon:LayoutGrid,
-      path:'/store'
+      auth:true
     },{
       id:5,
+      name:'Store',
+      icon:LayoutGrid,
+      path:'/store',
+      auth:true
+    },{
+      id:6,
       name:'News Letter',
       icon:Mail,
-      path:'/newsletter'
+      path:'/newsletter',
+      auth:true
     }
   ]
   const path = usePathname();
@@ -45,7 +59,7 @@ function SideNav() {
       <hr className='mt-7'></hr>
       {/*menu list*/}
       <div className='mt-5'>
-        {menu.map((item,index) => (
+        {menu.map((item,index) => item.auth&&(
           <Link href={item.path}>
           <div className={`group flex gap-3
           mt-1 p-3 text-[18px] 
