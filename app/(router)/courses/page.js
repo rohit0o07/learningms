@@ -17,7 +17,7 @@ function Courses() {
       </div>
       {/* right container*/}
       <div className='p-5 bg-white rounded-xl'>
-      right
+      
         <SideBanners/>
       </div>
     </div>

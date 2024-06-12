@@ -27,6 +27,7 @@ const getAllCourseList = async () => {
     totalChapters
     sourceCode
     tags
+    slug
   }
 }
 
@@ -62,6 +63,44 @@ try {
 }
 }
 
+const getCourseById = async(courseId) => {
+  const query = gql`
+        query MyQuery {
+        courseList(where: {slug: "`+courseId+`"}) {
+          author
+          banner {
+          url
+          }
+        chapter {
+        ... on Chapter {
+          id
+          name
+          video {
+          url
+          }
+        }
+      }
+      demoUrl
+      description
+      free
+      id
+      name
+      slug
+      sourceCode
+      tags
+      totalChapters
+      }
+    }`
+    
+try {
+  const result = await request(MASTER_URL, query);
+  return result;
+} catch (error) {
+  console.error('Error fetching course list:', error);
+  throw error;
+}
+}
+
 export default {
-  getAllCourseList,getSideBanner
+  getAllCourseList,getSideBanner,getCourseById
 };
