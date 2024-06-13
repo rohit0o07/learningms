@@ -46,7 +46,7 @@ function CourseList() {
         {courseList?.length>0? courseList.map((item,index)=>(
           <Link href={'/course-preview/'+item.id} >
           <div key={index}>
-            <CourseItem course={item}/>
+            <CourseItem course={item} key={index}/>
           </div>
           </Link>
         ))

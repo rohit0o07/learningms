@@ -97,8 +97,48 @@ try {
 }
 }
 
+const enrollToCourse = async (courseId, email) => {
+  if (!courseId || !email) {
+    throw new Error('Course ID and email are required');
+  }
 
+  const query = gql`
+    mutation MyMutation {
+      createUserEnrollCourse(
+        data: {
+          courseId: "${courseId}",
+          userEmail: "${email}",
+          courseList: { connect: { slug: "${courseId}" } }
+        }
+      ) {
+        id
+      }
+      publishManyUserEnrollCoursesConnection {
+        edges {
+          node {
+            id
+          }
+        }
+      }
+    }
+  `;
+
+  const result = await request(MASTER_URL, query);
+  return result;
+};
+
+const checkUserEnrolledTocourse = async(courseId,email) => {
+  const query=gql`
+  query MyQuery {
+  userEnrollCourses(where: {courseId: "${courseId}", userEmail:  "${email}"}) {
+    id
+  }
+}
+  `
+  const result = await request(MASTER_URL, query);
+  return result;
+}
 
 export default {
-  getAllCourseList,getSideBanner,getCourseById
+  getAllCourseList,getSideBanner,getCourseById,enrollToCourse,checkUserEnrolledTocourse
 };

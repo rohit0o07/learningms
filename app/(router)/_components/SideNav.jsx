@@ -59,8 +59,8 @@ function SideNav() {
       <hr className='mt-7'></hr>
       {/*menu list*/}
       <div className='mt-5'>
-        {menu.map((item,index) => item.auth&&(
-          <Link href={item.path}>
+        {menu.map((item) => item.auth&&(
+          <Link href={item.path} key={item.id}>
           <div className={`group flex gap-3
           mt-1 p-3 text-[18px] 
           items-center
